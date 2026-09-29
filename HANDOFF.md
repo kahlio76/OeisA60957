@@ -1,5 +1,11 @@
 # HANDOFF — proving OEIS A060957 (Yan Sheng Ang's conjecture) in Lean
 
+> **STATUS (2026-09-29): PARKED.** Later work is in `PROOF.md` (merged from the session2 branch) and
+> `scripts/session2/`. Read `PROOF.md` first: it supersedes §6/§9 below. The conjecture is still NOT proved
+> and no Lean work exists. Everything reduces to one missing global counting step (Claim*, PROOF.md VI.6/VI.10).
+> The per-level Hall inequality and the Prod+Quot+balance ablation are the newest leads.
+
+
 Read this whole file before doing anything. It records everything learned in one long
 local session (2026-09-28) so a fresh session can continue without redoing work.
 
