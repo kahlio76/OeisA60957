@@ -625,6 +625,26 @@ balance already force t ≤ 1 − T0 in every configuration for (n, p) ∈ {(20,
 even needed. Also, for every n ≤ 18 and p, the energies Σ_r C(g_r, 2) of the reps of any R have no gap larger
 than T0 + 1 (`energy.py`), another sufficient condition (a gap in E_n(R) forces an energy gap ≥ T0 + 2).
 
+### VI.6 The cleanest open target: a three-colouring statement
+
+In Setting M colour [2, n] by D⁺ (in T ∖ S), D⁻ (in S ∖ T) and F (neither or both). The certificates with k = 0
+(types (2), (3)) give, for distinct elements (proofs exactly as in Lemma 6.12, using p ∈ D⁻):
+ (M1) y, y' ∈ D⁺, yy' ≤ n ⇒ yy' ∈ D⁺;   (M2) z, z' ∈ D⁻, zz' ≤ n ⇒ zz' ∈ D⁻;
+ (M3) y ∈ D⁺, w ∈ F, yw ≤ n ⇒ yw ∉ D⁻;  (M4) z ∈ D⁻, w ∈ F, zw ≤ n ⇒ zw ∉ D⁺.
+(With p ∈ D⁻, (M2) and (M4) already imply the chain structure of Lemma 6.6(ii).) Together with
+ (S0) p, …, p^L ∈ D⁻   and   (S3) the p-free parts of ∏D⁺ and ∏D⁻ are equal,
+Setting M has v_p(∏D⁺) − v_p(∏(D⁻ ∖ {p, …, p^L})) = t + T0 ≥ T0 + 2. Hence:
+
+**Corollary 6.16.** The conjecture follows from **Claim\***: *for every n, p and every colouring of [2, n] into
+D⁺, D⁻, F satisfying (M1)–(M4), (S0), (S3), one has v_p(∏D⁺) ≤ v_p(∏(D⁻ ∖ {p, …, p^L})) + T0 + 1.*
+
+Evidence: the exhaustive search `rulecfg3.py` (VI.5) finds the much stronger bound "+1" (instead of "+T0+1") in
+every case tested, with equality e.g. for n = 30, p = 5, D⁺ = {6, 30, 12}, D⁻ ∖ pure = {16, 27}.
+Heuristic reason: (M1)–(M4) say the colouring behaves like the sign of an additive function φ on exponent
+vectors (D⁺ = {φ > 0}, D⁻ = {φ < 0}, F = {φ = 0}); for an exact such φ with φ(p) < 0 the balance gives
+v_p(∏D⁺) < v_p(∏(D⁻ ∖ pure)) by summing φ. The truncation at n is what prevents an exact φ; bounding the
+defect is the open problem.
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
