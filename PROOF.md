@@ -537,6 +537,26 @@ For A = {r p^i, r' p^{i'}} (i < α_r, i' < α_{r'}, i ≠ i' if r = r') we get �
 give e ∈ [0, t]: a forbidden pair of type (1), (2) or (3) — note (A, B) ≠ (D⁺, D⁻) because D⁻ contains p
 (Lemma 6.6) and B ⊆ {v}. Hence g ≥ α_r + α_{r'} − 1 (resp. g ≥ 2α_r − 2 ≥ 2). ∎
 
+**Theorem 6.13 (low/high split; only *heavy* relations matter).** Fix n, p, a p-free R, and work with reps of R
+over (W_n, ℓ) and their intervals I_g = [lo(g), hi(g) + T0] (Lemma 1.4). Suppose E_n(R) is not an interval:
+v ∈ E_n(R), v + 1 ∉ E_n(R), and let v + t (t ≥ 2) be the next element of E_n(R). Then
+ (a) every rep g is *low* (hi(g) + T0 ≤ v) or *high* (lo(g) ≥ v + t), and both kinds exist;
+ (b) if e is low, f is high and |f − e| is minimal among such pairs, then D = f − e is not M-adjacent, has no
+     proper part of ratio 1, no proper part of ratio w^{±1} with w ∈ W_n, D_w = 0, and
+     **Σ_{r : D_r > 0} C(D_r, 2) ≥ T0 + t ≥ T0 + 2**.
+*Proof.* (a) I_g ⊆ E_n(R) is an interval containing no point of [v+1, v+t−1]. (b) M-adjacent reps have meeting
+intervals (Lemma 1.8), impossible for a low and a high rep. A proper part E' of ratio 1 gives a rep e + E'
+between e and f; it is low or high, and pairs it with f or e at smaller distance. A single catalyst gives such an
+intermediate rep by Lemma 6.1 (distances |E| + 1, |E'| + 1 < |D| as in Theorem 6.3). Finally Lemma 1.5 (P1):
+v + t ≤ lo(f) ≤ hi(e) + Σ_{D_r > 0} C(D_r, 2) ≤ v − T0 + Σ_{D_r > 0} C(D_r, 2). ∎
+
+**Corollary 6.14.** The conjecture for (n, p) follows from **(MC-cat-heavy)**: every relation D on W_n with
+|D_r| ≤ ℓ_r and Σ_{D_r > 0} C(D_r, 2) ≥ T0 + 2 has a proper part of ratio 1 or of ratio w^{±1},
+w ∈ W_n ∖ supp D. Since C(D_r, 2) ≤ C(ℓ_r, 2) ≤ T0, such D repeat at least two elements on the positive side,
+and the repetition is large: e.g. two coordinates need D_r ≈ 0.7·L. This is much weaker than (MC-cat).
+(Heavy relations do exist in the abstract — e.g. for p = 5, D = L[2] + ⌊0.83L⌋[3] − [2^L 3^{⌊0.83L⌋}] when that
+number is ≤ n — but they come with catalysts such as 6 or 4.)
+
 So D⁺ is closed under products ≤ n (with growing bottom segments), while by Proposition 6.10 the balance must
 contain a "heavy" primitive relation among the p-free parts, i.e. one using ≥ 2 copies each of at least two
 distinct p-free parts of D⁺ with Σ C(d_r, 2) ≥ T0 + 2. **Open:** show that Lemma 6.12 (and the analogous
