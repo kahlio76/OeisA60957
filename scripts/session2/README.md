@@ -23,3 +23,12 @@ This matters: several statements that hold for all n ≤ 24 fail only at n ≈ 4
 | `twostep.py XMAX NMAX` | two-step single-move route Q → Y → X for x with ≥ 2 primes | 525,172 instances, 0 failures |
 | `locmin.py XMAX NMAX K PAIRMAX [semi]` | pairs not shortenable by ratio-1 moves of ≤ K blocks | semiprimes: K=3 ⇒ M-adjacent (≈3.3M), K=4 ⇒ also \|D⁻\| ≤ 1 |
 | `nonmadj_moves.py`, `nonmadj_moves2.py` | which merge/split moves shorten non-M-adjacent semiprime pairs | every one has a shortening merge/split (≈3.5M) |
+| `lip.py`, `lip2.py`, `lipgen.py`, `lipv.py`, `lipmoves.py` | Lipschitz row/column boundaries of 2-prime slices (PROOF Part IV route (Lip)) | slope-1 version fails in general worlds; direction-aware version: some orientation always holds so far |
+| `convF.py` | is the 2-prime slice lattice-convex? | yes for semiprimes x ≤ 15, **no** from x = 21 |
+| `gpsize.py` | size of shortening M-moves in the geodesic property | (timed out) |
+| `mccat.py X PMAX Pi mode` | cap-free (MC-cat)/(B-cat): non-M-adjacent relations with no ratio-1 / single-catalyst part | none found (PROOF Part VI.4) |
+| `catshape.py X PMAX` | smallest certificate shape for (MC-cat) | size ≤ 3 except 16 cases (size 4–5), X = 17 |
+| `pcat.py N0 N1` | (p-cat): certificates for all disjoint D⁺, D⁻ ⊆ [2,n], ratio p^t, t ≥ 2 | all have certificates, n ≤ 12 |
+| `mcrand.py XMAX TRIALS CMAX` | MC and (L\*) with random non-monotone caps | 0 failures, X ≤ 14 |
+| `pn_ally.py`, `pn_mixed.py` | fibers of P_n along every integer / rational ratio | intervals, n ≤ 26 / n ≤ 22 |
+| `ylstar.py XMAX NMAX` | y-fibers of S(V) for all composite y, not just the next element | intervals, X ≤ 16 |

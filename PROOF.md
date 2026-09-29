@@ -11,6 +11,12 @@ Proved inside the induction: Lemma L for prime powers x = q^k (Lemma 3.6); the *
 and, for x = ab, M-adjacency of minimum pairs with |D⁻| ≤ 1 (Lemma 3c.6).
 Open: (L\*) and (B) for general x with ≥ 2 distinct primes; (B) for prime powers.
 
+**New in Part VI (cap-free route):** a *single-catalyst lemma* (6.1) shows that capacities can never block a
+move that needs exactly one spare element. Consequently the conjecture follows from a statement about
+multiplicative relations that does **not mention caps at all**: (MC-cat) (Thm 6.3) or, more directly,
+(p-cat) about pairs of subsets of [2, n] (Thm 6.5). Both are open but hold in every test (Part VI.4), and
+(p-cat) already forces a rigid chain structure on any counterexample (Lemma 6.6, proved).
+
 ---
 
 ## Part I. Setup and the reduction to intervals of reps
@@ -335,6 +341,22 @@ with 4-block moves allowed, locally minimal pairs even have |D⁻| ≤ 1 (≈ 3.
   Where it breaks: via the a-decomposition, (L\*) for x = ab would follow if max{hi_a(m)} over core vectors
   of N_{a'} b^j were concave in j (and the min convex); for a fixed {a,b}-free core vector this holds (it is
   a resource allocation), but the maximum over core vectors of concave functions need not be concave.
+* **Route (Lip) for (L\*)**, x = a^k b^l with a, b distinct primes (k, l ≥ 1). Fix an {a,b}-free K and put
+  F = { (i, j) : K a^i b^j ∈ S(V) }, rows R_j = { i : (i, j) ∈ F }.
+  *Lemma IV.1 (proved).* Rows are intervals [A(j), B(j)] and the nonempty rows form an interval of j's (G\* along
+  a in V; and R_j ≠ ∅ ⇔ K b^j ∈ S(V_{a'}, κ) by Lemma 2.2, an interval in j by G\* along b in the class-𝒞 world
+  V(x, Π∪{a}), all available inside the master induction). If moreover **(Lip_x)** A(j+l) ≤ A(j) + k and
+  B(j+l) ≤ B(j) + k whenever R_j, R_{j+l} ≠ ∅, then L(V, x) holds for this K.
+  *Proof.* Let (i, j), (i + Tk, j + Tl) ∈ F, T ≥ 2. Rows j + l, …, j + Tl are nonempty. A(j+l) ≤ A(j) + k ≤ i + k,
+  and B(j+Tl) ≤ B(j+l) + (T−1)k gives B(j+l) ≥ i + Tk − (T−1)k = i + k. So (i+k, j+l) ∈ F. ∎
+  (Same with the roles of a and b exchanged — "columns".) By complement duality (e ↦ c − e maps F_K to a point
+  reflection of F_{K'}), the A-half and the B-half of (Lip_x) are equivalent over all K.
+  Evidence (`lipv.py`, n ≤ 200, all p): semiprimes x ≤ 22: the row version with b = the larger prime always
+  holds, the column version fails at x = 21; x = 12, 20 (= a²b): rows hold, columns fail; x = 18 (= a b²):
+  columns hold, rows fail. In every tested (x, K) at least one orientation holds. Open: a proof of (Lip_x).
+  For x = ab (a < b), within one {a,b}-free core vector the rows do satisfy it (every b-block is ub with u < a,
+  and it only takes a block away from the a-chain of u, so the per-core maximum B_μ(j) is non-increasing in j
+  on its feasible range); the difficulty is again the union over cores.
 * **Two-step route for (B)** (evidence, x ∈ {6,10,12,14,15}, n ≤ 150, 525,172 instances, 0 failures):
   some intermediate N·q (q | x) is representable, and there is Y ∈ R(Nq) with single moves Q → Y → X.
   By Lemma 3c.5 this would give (B). Existence of such Y is open.
@@ -368,3 +390,121 @@ were found only for n well beyond the n ≤ 24 range of earlier tests. Lesson: *
    N = 2939328, Q = {2³, 3², 6², 9², 14}; the needed move merges two 2's into a host:
    Q − 2[2] + [12] + [5].
 4. HANDOFF §8 dead ends remain dead.
+5. **"3-local minimality ⇒ M-adjacency" (for bridges)** — i.e. a pair (Q, X) that cannot be shortened by one
+   merge y·y' or one split, on either side, is M-adjacent. True for all semiprime x ≤ 15, n ≤ 100, but false at
+   x = 14, p = 5, n = 150: D = X − Q = +[7] + 2[8] + 2[9] − 3[6] − [12]. It is shortened only by the 2↔2 swap
+   8·9 = 6·12 (a ratio-1 part of D; see Part VI, where such parts are always usable).
+6. **(Lip) in general class-𝒞 worlds.** For primes a ≠ b and a fixed {a,b}-free part, let [A(j), B(j)] be the
+   set of a-exponents with b-exponent j. "A(j+1) ≤ A(j)+1 and B(j+1) ≤ B(j)+1" fails in general worlds
+   (V = 5-free numbers < 13 with a = 2, b = 3: 1532 failures; X = 18: 33,479 of 33.3M steps). It also fails
+   in the Lemma-L worlds V(x, Π) for x = 18 = 2·3² and x = 24 = 2³·3 in the orientation needed below
+   (Part IV, route (Lip)).
+
+---
+
+## Part VI. Catalysts: a cap-free route
+
+Notation. V is a finite set of integers ≥ 2. For D ∈ ℤ^V let D⁺, D⁻ be its positive and negative parts,
+|D| = Σ|D_v|, and ρ(D) = ∏ v^{D_v} ∈ ℚ_{>0} (the *ratio*). D is a *relation* if ρ(D) = 1.
+A *part* of D is a vector E with E_v between 0 and D_v for every v; then D − E is also a part and
+ρ(D) = ρ(E) ρ(D − E). Reps and caps are as in Part II, with all caps ≥ 1.
+
+**Lemma 6.1 (single catalyst).** Let 0 ≤ e ≤ c and 0 ≤ e + D ≤ c. Let E be a part of D, z ∈ V with D_z = 0,
+and s ∈ {+1, −1}. Then at least one of g₁ = e + E − s[z], g₂ = e + (D − E) + s[z] satisfies 0 ≤ g ≤ c.
+Both have g_v between e_v and (e + D)_v for all v ≠ z, and ∏g₁ = ∏e · ρ(E) z^{−s}, ∏g₂ = ∏e · ρ(D − E) z^{s}.
+
+*Proof.* For v ≠ z the entries E_v, (D − E)_v lie between 0 and D_v. At z the two candidates are e_z − s and
+e_z + s; since 0 ≤ e_z ≤ c_z and c_z ≥ 1, one of them lies in [0, c_z]. ∎
+
+So a move that needs one spare element z ∉ supp(D) is never blocked by capacities: it can always be made
+from one of the two ends. (Moves needing two spare elements can be blocked.)
+
+**Definition 6.2.** (MC-cat)(V): every relation D ≠ 0 on V that is **not** M-adjacent has a part
+E ∉ {0, D} with ρ(E) = 1 or ρ(E) = z^{±1} for some z ∈ V with D_z = 0.
+
+**Theorem 6.3.** If (MC-cat)(V) holds, then for **every** cap vector c ≥ 1 on V and every M, the reps of M are
+M-connected.
+
+*Proof.* Let e, f be reps of M, D = f − e (a relation). Induct on |D|. If D is M-adjacent we are done.
+Otherwise take E from (MC-cat). If ρ(E) = 1, then g = e + E is a rep of M (coordinatewise between e and f)
+with |g − e| = |E| < |D| and |f − g| = |D − E| < |D|; apply induction to (e, g) and (g, f).
+If ρ(E) = z^{s}, note |E| ≥ 2: otherwise E = ±[v] with D_v ≠ 0, and ρ(E) = v^{±1} = z^{±1} would force v = z,
+but D_z = 0. Likewise ρ(D − E) = z^{−s} gives |D − E| ≥ 2. By Lemma 6.1 one of g₁ = e + E − s[z],
+g₂ = e + (D − E) + s[z] is a rep (both have product M). Their distances to e and to f are |E| + 1 and
+|D − E| + 1 (in some order), both < |D|. Apply induction. ∎
+
+**Corollary 6.4.** If (MC-cat)(W_n) holds (W_n = p-free numbers in [2, n]), the conjecture holds for (n, p)
+(Theorem 6.3 with c = ℓ, then Theorem 1.9). No induction over worlds, no (L\*)/(B), no monotonicity of caps.
+
+The same lemma applies to the layer lemmas: a minimum-distance pair (Q, X) for (B) has no split
+D = E + (D − E) with ρ(D − E) ∈ {1} ∪ {z^{±1} : z ∈ V, D_z = 0}, D − E ≠ 0 (if ρ(D − E) = z^{s}, then
+ρ(E) = x z^{−s}, and by Lemma 6.1 one of the pairs (Q, Q + E + s[z]) — products N, Nx — and
+(Q + (D − E) − s[z], X) — products N, Nx — is valid; both have length |E| + 1 < |D|). So (B) for **all caps**
+follows from the cap-free statement **(B-cat)**: every relation of ratio x on V(x, Π) without such a split
+is M-adjacent.
+
+**Theorem 6.5 (direct form).** Fix n and p ≤ n. Suppose **(p-cat)**: for all disjoint D⁺, D⁻ ⊆ [2, n] with
+∏D⁺ = p^t ∏D⁻ and t ≥ 2, there are A ⊆ D⁺, B ⊆ D⁻ (possibly empty or everything) and 0 < k < t with
+  ∏A = p^k ∏B,  or  ∏A = p^k w ∏B,  or  w ∏A = p^k ∏B,
+for some w ∈ [2, n] ∖ (D⁺ ∪ D⁻) (a *certificate*). Then the conjecture holds for (n, p).
+
+*Proof.* Show by strong induction on t: if m, m p^t ∈ P_n then m p^k ∈ P_n for 0 ≤ k ≤ t. For t ≤ 1 there is
+nothing to prove. Let S, T ⊆ [2, n] with ∏S = m, ∏T = m p^t (the element 1 never matters), D⁺ = T ∖ S,
+D⁻ = S ∖ T. Take a certificate. If ∏A = p^k ∏B, then U = (S ∖ B) ∪ A has product m p^k.
+If ∏A = p^k w^{s} ∏B (s = ±1, w ∉ D⁺ ∪ D⁻, so w ∈ S ⇔ w ∈ T): U₁ = (S ∖ B) ∪ A has product m p^k w^s and
+U₂ = (T ∖ A) ∪ B has product m p^{t−k} w^{−s}. If s = 1 and w ∈ S, U₁ ∖ {w} has product m p^k; if s = 1 and
+w ∉ S (so w ∉ T), U₂ ∪ {w} has product m p^{t−k}. The case s = −1 is symmetric. In all cases m p^{k'} ∈ P_n
+for some 0 < k' < t; apply the induction hypothesis to (m, k') and (m p^{k'}, t − k'). ∎
+
+**Lemma 6.6 (structure of a certificate-free pair).** Let (D⁺, D⁻) be as in (p-cat) with no certificate,
+L = ⌊log_p n⌋, and C_r = { r p^i ≤ n } (levels 0, …, ℓ_r − 1) for p-free r. Then
+ (i) p, p², …, p^L ∈ D⁻, and D⁺ contains no power of p;
+ (ii) for every p-free r ≥ 2 there are 0 ≤ α_r ≤ β_r ≤ ℓ_r with D⁺ ∩ C_r = levels [0, α_r) and
+      D⁻ ∩ C_r = levels [β_r, ℓ_r);
+ (iii) t = Σ_r C(α_r, 2) − L(L+1)/2 − Σ_r Σ_{j=β_r}^{ℓ_r−1} j, and ∏_r r^{α_r} = ∏_r r^{ℓ_r − β_r}.
+
+*Proof.* Write F = [2, n] ∖ (D⁺ ∪ D⁻).
+(a) If p^j ∈ F for some 1 ≤ j < t, then A = B = ∅, w = p^j is a certificate (w·1 = p^j·1). Since t ≥ 2 and
+p ≤ n, this gives p ∈ D⁺ ∪ D⁻. If p ∈ D⁺, A = {p}, B = ∅ is a certificate (k = 1). So p ∈ D⁻.
+(b) Let y = r p^i ∈ D⁺ with i ≥ 1 and y ≠ p, and y' = r p^{i−1} (≥ 2). If y' ∈ F, A = {y}, B = ∅, w = y' is a
+certificate (∏A = p w); if y' ∈ D⁻, A = {y}, B = {y'} is one (∏A = p ∏B). Hence y' ∈ D⁺. So D⁺ ∩ C_r is
+closed downwards; for r = 1 this would reach p ∈ D⁺, impossible, so D⁺ has no power of p.
+(c) Let z = r p^j ∈ D⁻ and z' = r p^{j+1} ≤ n. If z' ∈ F, A = ∅, B = {z}, w = z' is a certificate
+(w = p ∏B); if z' ∈ D⁺, A = {z'}, B = {z} is one. Hence z' ∈ D⁻: D⁻ ∩ C_r is closed upwards. With (a),
+all of p, …, p^L lie in D⁻.
+(ii) follows from (b), (c) and disjointness; (iii) is the p-adic and p-free part of ∏D⁺ = p^t ∏D⁻. ∎
+
+So in a hypothetical counterexample D⁺ consists of *bottom* segments of chains and D⁻ of the whole pure chain
+plus *top* segments. Remaining task for (p-cat): produce a certificate from the balance
+∏ r^{α_r} = ∏ r^{ℓ_r − β_r} when t ≥ 2. Useful facts for this: for any sub-balance
+(c⁺_r ≤ α_r, c⁻_r ≤ ℓ_r − β_r with ∏ r^{c⁺_r} = ∏ r^{c⁻_r}) the exponents k realizable by parts using exactly
+those counts (choosing *which* levels, and any subset of the pure chain in B) form an **interval** of length
+≥ T0 = L(L+1)/2 (Lemmas 1.2, 1.3); the empty sub-balance realizes [−T0, 0] and the full one [t, t + T0]. A
+certificate without catalyst exists iff some sub-balance realizes a value in [1, t−1]; e.g. it suffices that
+the sub-balances can be grown from empty to full so that consecutive intervals overlap.
+
+### VI.4 Evidence for the cap-free statements (all 0 counterexamples)
+
+* (MC-cat): exhaustive over relations with ∏D⁺ ≤ 2·10⁵ on V(X, ∅), X ≤ 17 (75,295 non-M-adjacent
+  relations), and ∏D⁺ ≤ 10⁶ for X = 18 (236,828) and X = 20 (466,607); odd worlds V(X, {2}), X ≤ 23.
+  Certificates are local: for X = 17 the smallest certificate has size |A| + |B| ≤ 3 in all but 16 cases
+  (those use 2↔2 swaps such as 5·9 = 3·15), maximum 5. (`mccat.py`, `catshape.py`)
+* (B-cat): ratio-x relations with ∏D⁻ ≤ 3·10⁵, x = X ∈ {6, 10, 12, 14, 15, 18}: 0 catalyst-free non-M-adjacent.
+* (p-cat): exhaustive over all disjoint D⁺, D⁻ ⊆ [2, n], n ≤ 12, all p. (`pcat.py`)
+* MC itself for **random non-monotone caps** in [1, 3] on V(X, Π) (X ≤ 14, six choices of Π): 449,119
+  products, all M-connected; (L\*) never failed either (`mcrand.py`). So monotonicity of caps is not needed,
+  consistent with a cap-free proof.
+
+---
+
+## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
+
+* **All directions in P_n.** For every n ≤ 22, every m ∈ P_n and every ratio r = y/z with y, z ≤ 24,
+  gcd(y, z) = 1, the set { e ∈ ℤ : m r^e ∈ P_n } is an interval (12.6M fibers at n = 22; `pn_mixed.py`).
+  For integer ratios y ≤ 150 this holds for n ≤ 26 (32M fibers at n = 26; `pn_ally.py`). I.e. the set of
+  exponent vectors of P_n meets every lattice line in consecutive lattice points. (It is **not** the set of
+  lattice points of its convex hull — HANDOFF §8 — and abstract divisor-closed vector worlds with arbitrary
+  caps do have holes in 3-D, e.g. along (1, −1, 0) and (1, 1, 1): `scripts/random-abstract/dirs.py`.)
+* **(L\*) for every y, not just the next element.** In class-𝒞 worlds V = p-free numbers < X (X ≤ 16, caps
+  from every n ≤ 120), every y-fiber is an interval for every composite y ≤ 3X coprime to p: y ∈ V, y = next
+  element, and y beyond (14.9M fibers; `ylstar.py`).
