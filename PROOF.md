@@ -5,11 +5,13 @@ open, and Part V records strengthenings that are **false** (with explicit counte
 builds on them. Evidence numbers refer to scripts in `scripts/session2/`.
 
 Status line (update on every commit): **conjecture NOT yet proved.** The whole conjecture is now
-reduced (rigorously) to two statements, (L\*) and (B), about "class 𝒞" worlds (Part III, Theorem 3.9).
-Proved inside the induction: Lemma L for prime powers x = q^k (Lemma 3.6); the *prime bridge*
-(Prop. 3c.3); both (L) and (B) for x = a·b when all primes below a lie in Π (Cor. 3c.4, e.g. x = 2b);
-and, for x = ab, M-adjacency of minimum pairs with |D⁻| ≤ 1 (Lemma 3c.6).
-Open: (L\*) and (B) for general x with ≥ 2 distinct primes; (B) for prime powers.
+reduced (rigorously) to two statements, (L\*) and (B), about "class 𝒞" worlds (Part III, Theorem 3.9), and —
+independently — to cap-free statements about multiplicative relations (Part VI; the weakest one, Cor. 6.14,
+only concerns *heavy* relations). Proved inside the induction: Lemma L for prime powers x = q^k (Lemma 3.6); the
+*prime bridge* (Prop. 3c.3); both (L) and (B) for x = a·b when all primes below a lie in Π (Cor. 3c.4, e.g.
+x = 2b); and, for x = ab, M-adjacency of minimum pairs with |D⁻| ≤ 1 (Lemma 3c.6).
+Open: (L\*) and (B) for general x with ≥ 2 distinct primes; (B) for prime powers; on the cap-free route,
+the single combinatorial gap described in VI.5.
 
 **New in Part VI (cap-free route):** a *single-catalyst lemma* (6.1) shows that capacities can never block a
 move that needs exactly one spare element. Consequently the conjecture follows from a statement about
@@ -557,6 +559,20 @@ and the repetition is large: e.g. two coordinates need D_r ≈ 0.7·L. This is m
 (Heavy relations do exist in the abstract — e.g. for p = 5, D = L[2] + ⌊0.83L⌋[3] − [2^L 3^{⌊0.83L⌋}] when that
 number is ≤ n — but they come with catalysts such as 6 or 4.)
 
+**Lemma 6.12' (quotient rules).** In Setting M (β_s := ℓ_s if chain s has no D⁻ part):
+ (Quot) if α_r ≥ 1, s = ru ≤ n with u ≥ 2, β_s < ℓ_s and β_u ≥ 1, then β_s ≥ M + 1, where M = max(i + h) over
+  i < α_r, h < β_u (i ≠ h if u = r and h < α_r); for u ≠ r this is β_s ≥ α_r + β_u − 1;
+ (Quot') if α_s ≥ 1, s = r'u with β_{r'} < ℓ_{r'} and α_u < ℓ_u, then α_s ≤ μ, where μ = min(j + h) over
+  j ≥ β_{r'} (j < ℓ_{r'}), h ≥ α_u (h < ℓ_u, h ≠ j if u = r' and h ≥ β_u); for u ≠ r' this is
+  α_s ≤ β_{r'} + α_u;
+ (Prod⁻) if β_r < ℓ_r, β_{r'} < ℓ_{r'}, s = rr' ≤ n and β_s ≥ 1, then β_s ≤ ν, where ν = min(j + j') over
+  j ≥ β_r, j' ≥ β_{r'} (distinct if r = r'); for r ≠ r' this is β_s ≤ β_r + β_{r'}.
+*Proof.* As for Lemma 6.12, with the families (Quot) A = {r p^i} ∪ {u p^h if h < α_u}, B = {s p^j}, catalyst
+w = u p^h if α_u ≤ h < β_u, exponent e = i + h − j; (Quot') A = {s p^i}, B = {r' p^j} ∪ {u p^h if h ≥ β_u},
+catalyst u p^h if α_u ≤ h < β_u, e = i − j − h; (Prod⁻) B = {r p^j, r' p^{j'}}, A = {s p^g} if g < α_s, catalyst
+s p^g if α_s ≤ g < β_s, e = g − j − j'. In each case the realizable e form an interval whose left end is ≤ 0,
+B ≠ D⁻ (it misses p) and A ∪ B ≠ ∅; so the right end must be ≤ −1, which is the stated inequality. ∎
+
 So D⁺ is closed under products ≤ n (with growing bottom segments), while by Proposition 6.10 the balance must
 contain a "heavy" primitive relation among the p-free parts, i.e. one using ≥ 2 copies each of at least two
 distinct p-free parts of D⁺ with Σ C(d_r, 2) ≥ T0 + 2. **Open:** show that Lemma 6.12 (and the analogous
@@ -574,6 +590,40 @@ configuration with t ≥ 2 (n ≤ 50, p ∈ {3, 5, 7}, up to 4·10⁵ configurat
 * MC itself for **random non-monotone caps** in [1, 3] on V(X, Π) (X ≤ 14, six choices of Π): 449,119
   products, all M-connected; (L\*) never failed either (`mcrand.py`). So monotonicity of caps is not needed,
   consistent with a cap-free proof.
+
+**Lemma 6.15 (full-difference closure for a closest low/high pair).** In Theorem 6.13(b) write
+S^± = supp D^±. Then (with caps ℓ):
+ (R1) if y, y' are distinct copies in D⁺ and yy' ≤ n, then f_{yy'} = ℓ_{yy'} and e_{yy'} = 0;
+ (R2) if z, z' are distinct copies in D⁻ and zz' ≤ n, then e_{zz'} = ℓ_{zz'} and f_{zz'} = 0;
+ (R3) if z ∈ S⁻, y ∈ S⁺, z | y and w = y/z ∉ {1, z}, then f_w = ℓ_w and e_w = 0;
+ (R4) if y ∈ S⁺, z ∈ S⁻, y | z and w = z/y ∉ {1, y}, then e_w = ℓ_w and f_w = 0.
+*Proof.* (R1): e + [y] + [y'] − [yy'] (valid iff e_{yy'} ≥ 1) and f − [y] − [y'] + [yy'] (valid iff
+f_{yy'} < ℓ_{yy'}) are reps of R strictly closer to f, resp. e; each is low or high, giving a closer low/high pair.
+(R2)–(R4) are the same with the triangles [z] + [z'] − [zz'], [y] − [z] − [w], [z] − [y] − [w]. ∎
+
+(These are the ratio-1 analogues of Lemmas 3b.1 and 3b.3.) So the positive support is closed under products
+≤ n, and every such product is a *full* difference; likewise on the negative side and for quotients.
+
+### VI.5 Where the argument stands (frontier)
+
+The conjecture is reduced, rigorously, to each of the following cap-free statements (any one suffices):
+1. **(MC-cat)** for W_n (Cor. 6.4) — every non-M-adjacent relation has a ratio-1 or single-catalyst part.
+2. **(MC-cat-heavy)** for W_n (Cor. 6.14) — the same, but only for relations whose positive part is heavy,
+   Σ_{D_r>0} C(D_r, 2) ≥ T0 + 2; one may moreover assume (R1)–(R4) with the "full difference" conclusions.
+3. **(p-cat\*)** — Setting M (a closest gap pair of *sets*) is impossible; it forces the chain structure of
+   Lemma 6.6, the product rule 6.12, the dichotomy 6.8 and a heavy step (Prop. 6.10).
+
+What is missing in all three is the same combinatorial fact: *a heavy multiplicative relation whose positive
+support is closed under products (≤ n) and whose negative support is closed under products and quotients by
+positive elements cannot balance.* Local closure alone gives the snowball (D⁺ ⊇ all products ≤ n of its
+repeated elements, all as full differences), but I have no global counting argument that turns the snowball
+into a contradiction with ∏D⁺ = ∏D⁻.
+
+Evidence that the local rules suffice: for Setting M, the four rules of Lemmas 6.12 and 6.12' together with the
+balance already force t ≤ 1 − T0 in every configuration for (n, p) ∈ {(20,5), (24,5), (30,7), (36,7), (9..21,3),
+(27,3), (30,5)} (exhaustive, `rulecfg3.py`); in fact Σ C(α_r, 2) − Σ U_r ≤ 1 there, so the pure chain is not
+even needed. Also, for every n ≤ 18 and p, the energies Σ_r C(g_r, 2) of the reps of any R have no gap larger
+than T0 + 1 (`energy.py`), another sufficient condition (a gap in E_n(R) forces an energy gap ≥ T0 + 2).
 
 ---
 
