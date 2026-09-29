@@ -645,6 +645,33 @@ vectors (D⁺ = {φ > 0}, D⁻ = {φ < 0}, F = {φ = 0}); for an exact such φ w
 v_p(∏D⁺) < v_p(∏(D⁻ ∖ pure)) by summing φ. The truncation at n is what prevents an exact φ; bounding the
 defect is the open problem.
 
+### VI.7 The case p² > n (L = 1): exact reformulation and where it stops
+
+Here every p-multiple is rp with r ≤ k := ⌊n/p⌋ < p, and v_p(rp) = 1. Reps of a p-free R are count vectors g
+over the p-free numbers of [2, n] with cap 2 on the *small* values r ≤ k (r and rp) and cap 1 on the *large*
+ones. Put A(g) = #{r ≤ k : g_r = 2} and B(g) = #{r ≤ k : g_r ≥ 1} + 1 (the + 1 is the element p).
+
+**Lemma 6.17.** For L = 1, E_n(R) = ⋃_g [A(g), B(g)], and B(g) ≥ A(g) + 1. Consequently E_n(R) is an interval
+whenever the set 𝒜(R) = {A(g)} has no gap larger than 2 (consecutive elements differ by ≤ 2).
+*Proof.* With counts fixed, a doubled small r forces exactly one p-multiple (rp), a single small r allows 0 or 1,
+large values allow 0, and p allows 0 or 1; this is Lemma 1.4 with T0 = 1. B ≥ A + 1 since doubled ⊆ used. If
+𝒜(R) has gaps ≤ 2, the intervals [a, a+1] ⊆ [A(g), B(g)] for a ∈ 𝒜(R) cover [min 𝒜, max 𝒜 + 1]; every other
+[A(g), B(g)] starts inside this range, so the union is an interval. ∎
+
+So for p² > n the conjecture follows from the purely combinatorial **Doubling Lemma**: *among all ways of writing
+R as a product of p-free numbers ≤ n in which the values ≤ n/p may be used twice and the others once, the
+possible numbers of doubled values have no gap larger than 2.* (It is also essentially necessary: a gap of 3
+or more between consecutive A-values, with no other rep filling it, is exactly a gap in E_n(R).)
+
+Evidence (`l1gap.py`, `l1gap2.py`, all n ≤ 30 with p² > n): gaps > 2 never occur; gaps of exactly 2 do occur
+(first at n = 17, p = 5: R = 1990656 has 𝒜 = {0, 2}, via 6 ↔ 2·3 which doubles 2 and 3 at once), so the bound
+is sharp and the element p is what saves the conjecture — this is where the "+1" of Claim\* comes from.
+**Where it stops:** the Doubling Lemma is not local. For a rep f at level a > min 𝒜 the nearest rep at level
+a − 1 or a − 2 is at ℓ¹-distance up to 7 already for n ≤ 24, and the maximum grows with n (3, 4, 5, 6, 7 as n
+goes 7 → 24). So no bounded family of merge/split moves proves it; the local rules (products of two doubled
+values are full, halving r ↦ r² is blocked, …) are all satisfied in the hard instances, and a global counting
+argument is still missing — the same gap as in VI.5–VI.6, now in its smallest form.
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
