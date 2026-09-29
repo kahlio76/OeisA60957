@@ -700,6 +700,26 @@ with g_{j+1} = 2, split one copy j+1 = uv into smaller values or merge it with s
 by ≤ 2 and fails only if every target is already full. What remains is to show that "every target full"
 contradicts the existence of a rep on the other side.
 
+### VI.9 p² > n in increasing order: the bridges become 3- or 4-element moves
+
+The hard (Ba)/(Bb) instances of VI.8 (witness distance 5–6) all live in worlds C(j, M) with middle values
+*removed* (e.g. n = 20, p = 5: 2·2·12 = 6·8 needs a 5-move only because 3, 4 are absent) — an artifact of that
+ordering. Adding values in increasing order instead (m = 2, 3, …, n, p ∤ m; values m ≤ k added twice, as
+cap 0→1 then 1→2) keeps every intermediate world a *prefix* {p-free v ≤ m} with its final caps. The induction of
+Prop. 6.18 works verbatim in this order (Doubling holds in every prefix world: `l1prefix.py`, n ≤ 26), and:
+
+**Observation (all n ≤ 30 with p² > n, `l1moves.py`):** whenever R has reps using the newly added copy of m and
+reps not using it, two such reps differ by either **S3**: m ↔ u·v (uv = m), or **W4**: m·a ↔ b·c (a single swap).
+Both moves change A by at most 2 automatically (one coordinate −1 and at most two +1 on doubled-able values), so
+the A-condition of the bridges is free.
+
+So the p² > n case reduces to: **(Bridge-A, p² > n)** *in the world of all p-free values < m with caps 2 for
+v ≤ ⌊n/p⌋ and 1 otherwise, if R and R/m are both representable, then some rep of R/m becomes a rep of R by
+adding m and applying one S3 or W4 move.* This is the old bridge lemma of framework A (HANDOFF §4), restricted to
+p² > n and with the stronger conclusion "distance ≤ 4". In minimal-pair language (Part III-b): a closest pair
+has |D⁻| ≤ 1 and |D⁺| = 2. Prop. 3b.4 gives the case D⁻ = ∅; the case |D⁻| ≥ 2 is exactly the open core of (B).
+**So the special case has not become easier than the general bridge; it has become the same problem.**
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
