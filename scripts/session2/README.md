@@ -32,3 +32,9 @@ This matters: several statements that hold for all n ≤ 24 fail only at n ≈ 4
 | `mcrand.py XMAX TRIALS CMAX` | MC and (L\*) with random non-monotone caps | 0 failures, X ≤ 14 |
 | `pn_ally.py`, `pn_mixed.py` | fibers of P_n along every integer / rational ratio | intervals, n ≤ 26 / n ≤ 22 |
 | `ylstar.py XMAX NMAX` | y-fibers of S(V) for all composite y, not just the next element | intervals, X ≤ 16 |
+| `structcfg.py n p LIMIT` | Lemma-6.6 configurations with t ≥ 2: does a (p-cat) certificate exist? | always (n ≤ 50, p ∈ {3,5,7}, capped enumeration) |
+| `primcat.py`, `randcat.py` | primitive non-M-adjacent relations: smallest single-catalyst part | always size ≤ 3 (X ≤ 17); none missing (random, X = 30, 40) |
+| `bshape.py`, `bcat2.py` | ratio-x relations with \|D⁻\| ≥ 2: certificate shapes | always a certificate of size ≤ 4 (x ≤ 15) |
+| `rulecfg2.py`, `rulecfg3.py n p` | exhaustive search of Setting-M colourings obeying the local rules (Lemmas 6.12, 6.12') + balance | max t = 1 − T0 (never ≥ 2); profit − cost ≤ 1 |
+| `energy.py N0 N1` | energy gaps Σ C(g_r,2) among reps of each R | ≤ T0 + 1 for n ≤ 18 |
+| `heavycat.py` | random heavy relations (Cor. 6.14) | (too slow as written) |
