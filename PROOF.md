@@ -720,6 +720,33 @@ p² > n and with the stronger conclusion "distance ≤ 4". In minimal-pair langu
 has |D⁻| ≤ 1 and |D⁺| = 2. Prop. 3b.4 gives the case D⁻ = ∅; the case |D⁻| ≥ 2 is exactly the open core of (B).
 **So the special case has not become easier than the general bridge; it has become the same problem.**
 
+### VI.10 Timeboxed structure search on Claim* (C, `scripts/session2/c/claim.c`) — result and parking note
+
+`claim.c` enumerates every chain configuration (a_r ≤ b_r ≤ ℓ_r) obeying the local rules of Lemmas 6.12/6.12′
+and the p-free balance (it reproduces the Python node counts exactly), and records the excess
+E = Σ C(a_r, 2) − Σ_r Σ_{j=b_r}^{ℓ_r−1} j. Ranges done exhaustively: p = 3 (n ≤ 54), p = 5 (n ≤ 45),
+p = 7 (n ≤ 42), p = 2 (n ≤ 32).
+
+Findings.
+1. **max E = 1 in every case, independent of T0** (e.g. p = 3, T0 = 6; p = 2, T0 = 15 gives max E = 0). So
+   Claim* holds with "+1" in place of "+T0+1": the pure p-chain slack is never used.
+2. **Extremal shape:** E = 1 only when exactly one chain r has both of its two levels in D⁺ (r, rp ∈ D⁺,
+   e.g. r ∈ {6, 8, 9, 10}), all D⁻ elements sit at level 0 of length-1 chains, and the rest are level-0
+   swap pairs (26 ↔ 39, 22 ↔ 33, …).
+3. **Stronger per-level statement (new).** Let N⁺(t) = #{y ∈ D⁺ : p^t | y} and
+   N⁻(t) = #{z ∈ D⁻ ∖ {p, …, p^L} : p^t | z}. In every configuration searched,
+      **N⁺(t) ≤ N⁻(t) + [t = 1]  for all t ≥ 1.**
+   Summing over t gives E ≤ 1. This is a Hall-type condition: it says D⁺ elements divisible by p^t can be
+   injected into D⁻ elements divisible by p^t (with one exception at t = 1), which suggests a *matching* proof.
+   Partial support: Lemma 6.12′ (Quot) gives that if r | r′ with r ∈ R⁺, r′ ∈ R⁻ and the cofactor u has
+   b_u ≥ 1, then every D⁻ element of chain r′ lies at level ≥ a_r, i.e. exactly where the injection needs it.
+   The unhandled case is a cofactor chain lying entirely in D⁻ (b_u = 0).
+
+**Parking note.** No proof of Claim* or of the per-level inequality was found in this session. The per-level
+Hall condition is the one genuinely new lead; if it cannot be turned into an explicit injection (r ↦ a D⁻ element
+of a chain divisible by r, via the balance), Claim* should be considered parked together with (L*), (B),
+(MC-cat) and the Doubling Lemma, which all reduce to the same missing global step.
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
