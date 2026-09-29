@@ -38,3 +38,4 @@ This matters: several statements that hold for all n ≤ 24 fail only at n ≈ 4
 | `rulecfg2.py`, `rulecfg3.py n p` | exhaustive search of Setting-M colourings obeying the local rules (Lemmas 6.12, 6.12') + balance | max t = 1 − T0 (never ≥ 2); profit − cost ≤ 1 |
 | `energy.py N0 N1` | energy gaps Σ C(g_r,2) among reps of each R | ≤ T0 + 1 for n ≤ 18 |
 | `heavycat.py` | random heavy relations (Cor. 6.14) | (too slow as written) |
+| `c/claim.c`, `c/claim2.c`, `c/claim3.c`, `c/claimoff.c` | Claim* structure search (excess, per-level Hall slack, divisibility partners, rule ablation) | maxE = 1; Prod + Quot + balance suffice, neither alone does (PROOF VI.10) |

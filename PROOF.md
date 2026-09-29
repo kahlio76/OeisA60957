@@ -756,6 +756,21 @@ Hall condition is the one genuinely new lead; if it cannot be turned into an exp
 of a chain divisible by r, via the balance), Claim* should be considered parked together with (L*), (B),
 (MC-cat) and the Doubling Lemma, which all reduce to the same missing global step.
 
+**Follow-up attempt (which local rules does the bound actually use?), `claimoff.c`.** Same search as `claim.c`,
+with a bitmask that disables rules (1 = Prod, 2 = Quot, 4 = Quot′, 8 = Prod⁻); the p-free balance stays on.
+ * Everything off: maxE = 4 (n = 30, p = 5) and 9 (n = 36, p = 3). The balance alone is far from enough.
+ * Disabling any single rule, or Quot+Quot′, or Quot′+Prod⁻: maxE = 1 at (30, 5).
+ * **Prod only** (mask 14): maxE ≥ 2 at (36, 3) and (42, 7). **Quot only** (mask 13): maxE ≥ 2 at (42, 7).
+   Prod+Quot both off (mask 3): maxE = 4. Typical violator: 2, 4, 6 all doubled (a = ℓ = 2) with 8, 12
+   untouched. Prod would force 8 = 2·4 into D⁺, and Quot would forbid the D⁻ elements above them.
+ * **Prod + Quot + balance** (mask 12, Quot′ and Prod⁻ off): maxE = 1 at (36,3), (42,3), (36,5), and
+   (40,5), (42,7) (the last two capped at 6·10⁸ nodes).
+So Quot′ and Prod⁻ appear to be redundant, and neither Prod nor Quot can be dropped: any proof of Claim* has to
+combine Prod and Quot with the balance. For L = 1 (p² > n) the reduced statement, #{doubled r} ≤ #{r : rp ∈ D⁻} + 1,
+where Prod makes the doubled set closed under products that stay small, is again the Doubling-Lemma count of
+VI.7, and its abstract (sparse-value) version is false (VI.8). So the argument has to use the density of
+W = p-free numbers ≤ n, and I found no way to do that. **This follow-up gives no proof; Claim\* stays parked.**
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
