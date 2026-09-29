@@ -742,6 +742,15 @@ Findings.
    b_u ≥ 1, then every D⁻ element of chain r′ lies at level ≥ a_r, i.e. exactly where the injection needs it.
    The unhandled case is a cofactor chain lying entirely in D⁻ (b_u = 0).
 
+**Follow-up (dividing out the all-D⁻ cofactor), `claim3.c`.** Before building the reduction I measured how the
+injection would actually be used (p = 5, n = 40; p = 3, n = 48; p = 7, n = 42, all configurations):
+ * no configuration ever has a chain with a_r ≥ 3, so N⁺(t) = 0 for t ≥ 2 and only t = 1 matters;
+ * for **every** chain r with a_r = 2 (155, 4091 and 185 instances respectively) there is **no** D⁻ element at
+   level ≥ 1 in any chain divisible by r — neither with a good cofactor nor with an all-D⁻ one.
+So the "stuck case" never occurs, and the reduction question is moot: the injection cannot be built from
+divisibility at all. What remains at t = 1 is "#{r : r, rp ∈ D⁺} ≤ #{non-pure z ∈ D⁻ with p | z} + 1", i.e. the
+Doubling-Lemma count again (VI.7), so this lead closes the loop instead of breaking it. **Claim\* is parked.**
+
 **Parking note.** No proof of Claim* or of the per-level inequality was found in this session. The per-level
 Hall condition is the one genuinely new lead; if it cannot be turned into an explicit injection (r ↦ a D⁻ element
 of a chain divisible by r, via the balance), Claim* should be considered parked together with (L*), (B),
