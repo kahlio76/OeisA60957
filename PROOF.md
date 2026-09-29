@@ -672,6 +672,34 @@ goes 7 → 24). So no bounded family of merge/split moves proves it; the local r
 values are full, halving r ↦ r² is blocked, …) are all satisfied in the hard instances, and a global counting
 argument is still missing — the same gap as in VI.5–VI.6, now in its smallest form.
 
+### VI.8 p² > n: reduction of the Doubling Lemma to two local bridges (fixed n)
+
+Fix n, p with p² > n and k = ⌊n/p⌋ (so every r ≤ k is p-free). For 1 ≤ j ≤ k and M ⊆ (j, k] let the world
+C(j, M) consist of the values 2, …, j with cap 2, the values of M with cap 1, and all p-free values in (k, n]
+with cap 1; put A(g) = #{r ≤ j : g_r = 2}. The real world is W_n = C(k, ∅).
+
+**Proposition 6.18.** Suppose, for all j, M:
+ **(Ba)** for x ∈ (j, k] ∖ M, if R and R/x are both representable in C(j, M), there are reps g of R and h of R/x
+  there with |A(g) − A(h)| ≤ 2;
+ **(Bb)** for 1 ≤ j < k and j+1 ∉ M: if in C(j+1, M) the product R has a rep with g_{j+1} = 2 and a rep with
+  g_{j+1} ≤ 1, then it has such a pair whose A-values differ by ≤ 2.
+Then every C(j, M) satisfies the Doubling Lemma; in particular (Lemma 6.17) the conjecture holds for (n, p).
+*Proof.* Induction on j, then on |M|. For j = 1 there are no doubled values, A ≡ 0. If M ≠ ∅, pick x ∈ M: the
+reps of R in C(j, M) are those of R in C(j, M∖x) together with those of R/x there plus [x], with the same A;
+both A-sets have gaps ≤ 2 by induction and (Ba) puts them within 2 of each other, so the union has gaps ≤ 2.
+For C(j, M) with M ⊆ (j, k] and j ≥ 2 reached from j − 1: reps with g_j ≤ 1 are exactly the reps in
+C(j−1, M ∪ {j}) (same A), reps with g_j = 2 are reps of R/j² in C(j−1, M) plus 2[j] (A + 1); conclude with (Bb). ∎
+
+Evidence (`l1class.py`, `l1bridges2.py`, all n ≤ 24): Doubling holds in every C(j, M) (≈1.6M products);
+(Ba) and (Bb) never fail (≈750k instances) and always have a witness pair at ℓ¹-distance ≤ 6 (mostly 3: one value
+replaced by two factors, or two values merged). Warning (`l1gen2.py`, `l1arb.py`): the Doubling Lemma is
+**false** for arbitrary value sets — values 2..4 twice plus larges {18, 24, 29, 39, 46, 48, 53} once give a jump
+0 → 3; without the value 2, R = 84² jumps 0 → 3 — so a proof of (Ba)/(Bb) must use that *all* small values and
+all p-free numbers in (k, n] are present. Status: (Ba), (Bb) unproved. Natural local attempt for (Bb): from a rep
+with g_{j+1} = 2, split one copy j+1 = uv into smaller values or merge it with some s into (j+1)s; each changes A
+by ≤ 2 and fails only if every target is already full. What remains is to show that "every target full"
+contradicts the existence of a rep on the other side.
+
 ---
 
 ## Part VII. Empirical generalizations (not needed, but they suggest the "right" statement)
