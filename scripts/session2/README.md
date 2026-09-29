@@ -19,3 +19,7 @@ This matters: several statements that hold for all n ≤ 24 fail only at n ≈ 4
 | `geodesic.py N0 N1 CAP` | geodesic property for MC in the core world | holds n ≤ 22 |
 | `geoprof.py` | geodesic property on sub-worlds with large-n caps | (to rerun) |
 | `verify_partV.py` | independent check of the PROOF.md Part V counterexamples | all confirmed |
+| `samecore.py XMAX NMAX` | bridge pairs sharing the same x-free core multiset | exist and can be M-adjacent in all tested non-prime-power cases; 216 exceptions, all x = 9 |
+| `twostep.py XMAX NMAX` | two-step single-move route Q → Y → X for x with ≥ 2 primes | 525,172 instances, 0 failures |
+| `locmin.py XMAX NMAX K PAIRMAX [semi]` | pairs not shortenable by ratio-1 moves of ≤ K blocks | semiprimes: K=3 ⇒ M-adjacent (≈3.3M), K=4 ⇒ also \|D⁻\| ≤ 1 |
+| `nonmadj_moves.py`, `nonmadj_moves2.py` | which merge/split moves shorten non-M-adjacent semiprime pairs | every one has a shortening merge/split (≈3.5M) |

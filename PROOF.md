@@ -6,7 +6,10 @@ builds on them. Evidence numbers refer to scripts in `scripts/session2/`.
 
 Status line (update on every commit): **conjecture NOT yet proved.** The whole conjecture is now
 reduced (rigorously) to two statements, (L\*) and (B), about "class 𝒞" worlds (Part III, Theorem 3.9).
-Lemma L for prime powers x = q^k is now *proved* inside the induction (it was open before).
+Proved inside the induction: Lemma L for prime powers x = q^k (Lemma 3.6); the *prime bridge*
+(Prop. 3c.3); both (L) and (B) for x = a·b when all primes below a lie in Π (Cor. 3c.4, e.g. x = 2b);
+and, for x = ab, M-adjacency of minimum pairs with |D⁻| ≤ 1 (Lemma 3c.6).
+Open: (L\*) and (B) for general x with ≥ 2 distinct primes; (B) for prime powers.
 
 ---
 
@@ -241,11 +244,100 @@ largest copy y_max satisfy y · y_max ≤ x / (product of the other ≥ 1 copies
 
 ---
 
+## Part III-c. Prime bridges, and the case x = q·b with q the smallest available prime
+
+Throughout this part V is divisor-closed with caps c, q a prime, (V, c) q-dominated, and we use the
+q-decomposition of Part II (core vectors m over (V_{q'}, κ), I(m) = [lo(m), hi(m) + T_q]).
+A **single move** from a rep Y is a rep Y' with Y' − Y having at most one entry +1, at most one entry −1,
+and all other entries 0.
+
+**Lemma 3c.1 (single up-move).** Let Y be a rep of M q^e whose core vector is m, and suppose
+e < hi(m) + T_q. Then there is a rep Y' of M q^{e+1} with the same core vector m such that Y' − Y is a
+single move.
+
+*Proof.* The q-exponent of Y is the sum of the level sums of the chains plus the pure-chain sum. Since the
+total is below hi(m) + T_q, some chain u has level sum < hi_u(m_u), or the pure part has sum < T_q.
+In the first case the proof of Lemma 2.1 gives a copy at a level i with a free copy at level i+1; moving it
+is the single move −[u q^i] + [u q^{i+1}]. In the second case: if the pure level 1 (block q) has room, add
+it (+[q]); otherwise let j ≥ 2 be the least level with a free copy (it exists, the pure part not being full);
+level j−1 is full, hence used, and −[q^{j−1}] + [q^j] is a single move. Each case raises the exponent by 1
+and keeps the core vector. ∎
+
+**Lemma 3c.2 (crossing).** Let I_0, …, I_s be integer intervals with I_{i} ∩ I_{i+1} ≠ ∅ for all i,
+α ∈ I_0 and α + 1 ∈ I_s. Then some I_i contains both α and α + 1.
+
+*Proof.* Let i* be the largest index with α ∈ I_{i*}. If α + 1 ∈ I_{i*} we are done; otherwise
+max I_{i*} = α, so i* < s. For j > i*, α ∉ I_j; by induction each I_j ⊆ (−∞, α−1]: I_{i*+1} meets
+I_{i*} ⊆ (−∞, α] and misses α, and each later I_j meets I_{j−1} ⊆ (−∞, α−1] and misses α. This
+contradicts α + 1 ∈ I_s. ∎
+
+**Proposition 3c.3 (prime bridge, PB).** Assume MC holds for (V_{q'}, κ) (at least for the product
+M = N_{q'}). If N, N q ∈ S(V), then there are Q ∈ R(N) and X ∈ R(Nq) with X − Q a single move
+(in particular M-adjacent).
+
+*Proof.* Let α = v_q(N). By Lemma 2.2 there are core vectors m, m' of M with α ∈ I(m), α+1 ∈ I(m').
+By MC(V_{q'}) they are joined by an M-path, along which consecutive intervals intersect (proof of
+Theorem 2.5). By Lemma 3c.2 some core vector μ on the path has α, α+1 ∈ I(μ). Take any rep Q of N
+with core vector μ (Lemma 2.2) and apply Lemma 3c.1. ∎
+
+**Corollary 3c.4 (x = q·b, q the smallest prime outside Π).** Let (x, Π, c) be class 𝒞 with
+V = V(x, Π), x = a·b with a < b primes, and suppose every prime < a lies in Π. Assume MC for all
+class-𝒞 worlds with fewer elements than V ∪ {x}. Then L(V, x) and B(V, x) hold.
+
+*Proof.* Every integer in [2, a) has a prime factor < a, so V ∩ [2, a) = ∅. If b·w ∈ V then w < a, so
+w = 1: **b is the only element of V divisible by b.** Hence V' := V ∖ {b} is divisor-closed, and for b-free
+M, M b^j ∈ S(V) ⇔ (M ∈ S(V') and j ≤ c_b), reps of b-free products being the same over V and V'.
+Write N = N' b^β with b ∤ N'.
+(L) If N (ab)^t ∈ S(V) then N' a^t ∈ S(V') and β + t ≤ c_b. For b-free M the a-fiber of M in S(V') equals
+its a-fiber in S(V), an interval by Theorem 2.5 applied to V (MC(V(x, Π∪{a})) holds by hypothesis;
+domination by Lemma 3.2). So N' a ∈ S(V'), and β + 1 ≤ c_b; thus N ab = N' a b^{β+1} ∈ S(V).
+(B) If N, Nab ∈ S(V) then N', N'a ∈ S(V') and β + 1 ≤ c_b. V' is a-dominated (its pure a-chain and a-chains
+are those of V, minus the one-element chain {b}), and its a-free core vectors of the b-free product
+N'_{a'} are exactly those over V_{a'}, which are M-connected by hypothesis. Proposition 3c.3 in V' gives
+Q' ∈ R_{V'}(N'), X' ∈ R_{V'}(N'a) differing by a single move. Then Q = Q' + β[b] ∈ R(N),
+X = X' + (β+1)[b] ∈ R(Nab), and X − Q = (X' − Q') + [b] has entries in {−1, 0, 1}: M-adjacent. ∎
+
+In the real problem (Π = {p}) this settles every x = 2b (p odd) and x = 3b (p = 2); inside the class-𝒞
+recursion it settles x = q_0 b for the least prime q_0 ∉ Π.
+
+**Lemma 3c.5 (composition).** If Y − Q and X − Y are single moves then X − Q is M-adjacent.
+
+*Proof.* X − Q is a sum of two vectors each with at most one +1 and one −1; an entry +2 needs both +1's
+at the same place and an entry −2 needs both −1's at the same place. ∎
+
+**Lemma 3c.6 (semiprime minimal pairs with |D⁻| ≤ 1).** In the setting of Part III-b, let x = ab with a ≠ b
+primes, and let (Q, X) be a minimum-distance pair with |D⁻| ≤ 1 (counted with multiplicity). Then D is
+M-adjacent; in fact all entries of D are in {−1, 0, 1}.
+
+*Proof.* If D⁻ = ∅ use Proposition 3b.4. Let D⁻ = {z} (one copy); then ∏D⁺ = a·b·z. No element of V
+is divisible by ab (it would force ab ∈ V by divisor-closedness, but ab = x ∉ V). Fix a bijection between
+the prime factors (with multiplicity) of ∏D⁺ and those of a·b·z respecting primes; the copy receiving a,
+the copy receiving b are distinct copies y_a ≠ y_b. Every other copy y receives only primes of z, so y | z.
+By Lemma 3b.3 (second part), z/y ∈ D⁻ unless z/y = y; since D⁻ = {z} and z/y ≠ z, we get z = y². The
+special case y ∈ D⁺, y² = z ∈ D⁻ forces c_y = 1, X_y = 1, Q_y = 0: indeed Q − [y²] + 2[y] (valid if
+Q_y ≤ c_y − 2) and X − 2[y] + [y²] (valid if X_y ≥ 2) would both be strictly closer; so Q_y ≥ c_y − 1 and
+X_y ≤ 1, while D_y ≥ 1. Hence there is at most one such y (two copies would give D_y ≥ 2), and
+D⁺ ⊆ {y_a, y_b, y} consists of pairwise different types each of multiplicity 1 (y_a and y_b differ because
+one is divisible by a and not b, the other the reverse; y differs from both since D_y = 1). ∎
+
+Evidence that the remaining case is only a finite local analysis: for semiprime x ∈ {6, 10, 14, 15}, all
+n ≤ 100, all p, every pair (Q, X) that cannot be shortened by a single merge (y, y' → yy') or split on Q
+or on X is M-adjacent (≈ 3.3M locally minimal pairs; `scripts/session2/locmin.py 15 100 3 … semi`);
+with 4-block moves allowed, locally minimal pairs even have |D⁻| ≤ 1 (≈ 3.0M pairs).
+
+---
+
 ## Part IV. What is still open (honest status)
 
-* **(L\*)**: Lemma L for next elements x with ≥ 2 distinct prime factors (e.g. x = ab).
-  Evidence: no counterexample in any test (HANDOFF §6; this session's profile scan x ≤ 15, n ≤ 400, all p:
-  ~1.39M Lemma-L instances, 0 failures).
+* **(L\*)**: Lemma L for next elements x with ≥ 2 distinct prime factors (e.g. x = ab), except the case
+  covered by Corollary 3c.4. Evidence: no counterexample in any test (HANDOFF §6; this session's profile
+  scan x ≤ 15, n ≤ 400, all p: ~1.39M Lemma-L instances, 0 failures).
+  Where it breaks: via the a-decomposition, (L\*) for x = ab would follow if max{hi_a(m)} over core vectors
+  of N_{a'} b^j were concave in j (and the min convex); for a fixed {a,b}-free core vector this holds (it is
+  a resource allocation), but the maximum over core vectors of concave functions need not be concave.
+* **Two-step route for (B)** (evidence, x ∈ {6,10,12,14,15}, n ≤ 150, 525,172 instances, 0 failures):
+  some intermediate N·q (q | x) is representable, and there is Y ∈ R(Nq) with single moves Q → Y → X.
+  By Lemma 3c.5 this would give (B). Existence of such Y is open.
 * **(B)**: the bridge lemma, all composite x.
   Evidence: HANDOFF §6; profile scan (x ≤ 15, n ≤ 400): ~2.49M bridge instances, 0 failures.
   Stronger form suggested by data: **every minimum-distance pair (Q, X) is M-adjacent**; in fact
