@@ -475,13 +475,73 @@ all of p, …, p^L lie in D⁻.
 (ii) follows from (b), (c) and disjointness; (iii) is the p-adic and p-free part of ∏D⁺ = p^t ∏D⁻. ∎
 
 So in a hypothetical counterexample D⁺ consists of *bottom* segments of chains and D⁻ of the whole pure chain
-plus *top* segments. Remaining task for (p-cat): produce a certificate from the balance
-∏ r^{α_r} = ∏ r^{ℓ_r − β_r} when t ≥ 2. Useful facts for this: for any sub-balance
-(c⁺_r ≤ α_r, c⁻_r ≤ ℓ_r − β_r with ∏ r^{c⁺_r} = ∏ r^{c⁻_r}) the exponents k realizable by parts using exactly
-those counts (choosing *which* levels, and any subset of the pure chain in B) form an **interval** of length
-≥ T0 = L(L+1)/2 (Lemmas 1.2, 1.3); the empty sub-balance realizes [−T0, 0] and the full one [t, t + T0]. A
-certificate without catalyst exists iff some sub-balance realizes a value in [1, t−1]; e.g. it suffices that
-the sub-balances can be grown from empty to full so that consecutive intervals overlap.
+plus *top* segments.
+
+### VI.3 A minimal counterexample, sub-balances, and the "heavy step" reduction
+
+**Setting M.** Suppose the conjecture fails for (n, p). Then there are m and t ≥ 2 with m, m p^t ∈ P_n and
+m p^k ∉ P_n for 0 < k < t (take two consecutive members of E_n(R) around a gap). Among all S, T ⊆ [2, n]
+with ∏S = m, ∏T = m p^t choose one with |S Δ T| minimal, and put D⁺ = T ∖ S, D⁻ = S ∖ T, F = [2,n] ∖ (S Δ T).
+Then there is no pair A ⊆ D⁺, B ⊆ D⁻ with
+ (1) ∏A = p^k w^ε ∏B, 0 < k < t, ε ∈ {0, ±1}, w ∈ F (a (p-cat) certificate: gives m p^{k'} ∈ P_n, 0<k'<t);
+ (2) (A, B) ∉ {(∅, ∅), (D⁺, D⁻)} and ∏A = ∏B or ∏A = p^t ∏B ((S ∖ B) ∪ A would give a pair closer than
+     (S, T) with the same two products);
+ (3) (A, B) ∉ {(∅, ∅), (D⁺, D⁻)} and ∏A = w^{±1} ∏B or ∏A = p^t w^{±1} ∏B with w ∈ F (Lemma 6.1 with all
+     caps 1 gives a strictly closer pair, as in the proof of Theorem 6.3).
+In particular Lemma 6.6 applies. Keep its notation, put m_r = ℓ_r − β_r and T0 = L(L+1)/2.
+
+**Definition.** A *sub-balance* is σ = (c⁺, c⁻) with 0 ≤ c⁺_r ≤ α_r, 0 ≤ c⁻_r ≤ m_r (r ≥ 2 p-free) and
+∏_r r^{c⁺_r} = ∏_r r^{c⁻_r}. A *realization* of σ is a pair (A, B): A consists of c⁺_r elements of D⁺ ∩ C_r
+for each r, B of c⁻_r elements of D⁻ ∩ C_r for each r ≥ 2 together with an arbitrary subset of {p, …, p^L}.
+Write σ ≤ σ' for the componentwise order; 0 and σ_full = (α, m) are the extreme sub-balances.
+
+**Lemma 6.7 (realizable exponents form an interval).** Every realization of σ has ∏A = p^δ ∏B, and the set of
+these δ is the integer interval I(σ) = [lo(σ) − T0, hi(σ)], where
+ hi(σ) = Σ_r [c⁺_r(α_r − 1) − C(c⁺_r, 2)] − Σ_r [c⁻_r β_r + C(c⁻_r, 2)],
+ lo(σ) = Σ_r C(c⁺_r, 2) − Σ_r [c⁻_r(ℓ_r − 1) − C(c⁻_r, 2)].
+*Proof.* The p-free parts cancel by definition. Per chain, the level sums of c-element subsets of a segment of
+consecutive levels form an interval (Lemma 1.2, shifted); the pure part contributes −[0, T0] (Lemma 1.3); a sum
+of integer intervals is an integer interval. The endpoints are the stated extreme choices. ∎
+
+**Lemma 6.8 (dichotomy).** In Setting M, I(0) = [−T0, 0], I(σ_full) = [t, t + T0], and for every other
+sub-balance σ either I(σ) ⊆ (−∞, −1] ("low") or I(σ) ⊆ [t + 1, ∞) ("high").
+*Proof.* For σ = σ_full all non-pure elements are used and B ⊇ … varies over subsets of the pure chain, so
+δ = t + T0 − (subset sum). For σ ∉ {0, σ_full} a realization with δ ∈ [0, t] would be a forbidden pair of type
+(1) or (2): it is not (∅, ∅) (σ ≠ 0 uses a non-pure element) and not (D⁺, D⁻) (σ ≠ σ_full misses one). ∎
+
+**Lemma 6.9 (one step up).** If σ ≤ σ' and d_r = c'⁺_r − c⁺_r, then lo(σ') − hi(σ) ≤ Σ_r C(d_r, 2).
+*Proof.* Per chain in D⁺: C(c+d, 2) − [c(α−1) − C(c, 2)] = c(c + d − α) + C(d, 2) ≤ C(d, 2) as c + d ≤ α. Per
+chain in D⁻ the contribution is BOT(c⁻) − TOP(c'⁻) ≤ 0 (the lowest c⁻ levels of a segment sum to at most its
+highest c'⁻ ≥ c⁻ levels). ∎
+
+**Proposition 6.10 (a heavy step is unavoidable).** In Setting M, along every chain of sub-balances
+0 = σ_0 < σ_1 < … < σ_K = σ_full some step has Σ_r C(c⁺_r(σ_{i+1}) − c⁺_r(σ_i), 2) ≥ T0 + t.
+*Proof.* Let i + 1 be the least index with I(σ_{i+1}) ⊆ [t, ∞) (i + 1 = K at the latest). By Lemma 6.8,
+I(σ_i) ⊆ (−∞, 0], i.e. hi(σ_i) ≤ 0, while lo(σ_{i+1}) − T0 ≥ t. Now apply Lemma 6.9. ∎
+
+Since C(d_r, 2) ≤ C(ℓ_r, 2) ≤ T0 (Lemma 1.6), a heavy step must raise at least two D⁺-chains by ≥ 2 each.
+Hence:
+
+**Corollary 6.11 (reduction).** The conjecture holds for (n, p) if in every configuration of Setting M the
+p-free balance admits a chain of sub-balances from 0 to σ_full whose steps are all *light*
+(Σ_r C(d_r, 2) < T0 + t) — e.g. if it decomposes into sub-balance increments each of which raises at most one
+D⁺-chain by more than 1.
+
+**Lemma 6.12 (products stay in D⁺).** In Setting M, let r, r' be p-free with rr' ≤ n. If r ≠ r' and
+α_r, α_{r'} ≥ 1, then α_{rr'} ≥ min(ℓ_{rr'}, α_r + α_{r'} − 1). If r = r' and α_r ≥ 2, then
+α_{r²} ≥ min(ℓ_{r²}, 2α_r − 2) and α_{r²} ≥ 1.
+*Proof.* Let g = α_{rr'}; if g = ℓ_{rr'} there is nothing to prove. Otherwise v = rr' p^g is in F or in D⁻.
+For A = {r p^i, r' p^{i'}} (i < α_r, i' < α_{r'}, i ≠ i' if r = r') we get ∏A = p^{e} v ∏∅ (v ∈ F) or
+∏A = p^{e} ∏{v} (v ∈ D⁻) with e = i + i' − g. The realizable e form the interval [−g, α_r + α_{r'} − 2 − g]
+(resp. [1 − g, 2α_r − 3 − g]), whose left end is ≤ 1 ≤ t − 1. If its right end were ≥ 0, some choice would
+give e ∈ [0, t]: a forbidden pair of type (1), (2) or (3) — note (A, B) ≠ (D⁺, D⁻) because D⁻ contains p
+(Lemma 6.6) and B ⊆ {v}. Hence g ≥ α_r + α_{r'} − 1 (resp. g ≥ 2α_r − 2 ≥ 2). ∎
+
+So D⁺ is closed under products ≤ n (with growing bottom segments), while by Proposition 6.10 the balance must
+contain a "heavy" primitive relation among the p-free parts, i.e. one using ≥ 2 copies each of at least two
+distinct p-free parts of D⁺ with Σ C(d_r, 2) ≥ T0 + 2. **Open:** show that Lemma 6.12 (and the analogous
+quotient rules) leave room only for light decompositions. Evidence: `structcfg.py` finds every Lemma-6.6
+configuration with t ≥ 2 (n ≤ 50, p ∈ {3, 5, 7}, up to 4·10⁵ configurations each) certificate-bearing.
 
 ### VI.4 Evidence for the cap-free statements (all 0 counterexamples)
 
